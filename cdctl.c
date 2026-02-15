@@ -402,11 +402,11 @@ int do_get_subchannel(int cdrom) {
 
 	printf("Current track: %i\n", subchannel->cdsc_trk);
 	printf("Current index: %i\n", subchannel->cdsc_ind);
-	printf("Absolute CD position: %i:%i.%i\n",
+	printf("Absolute CD position: %i:%02i.%02i\n",
 					subchannel->cdsc_absaddr.msf.minute,
 					subchannel->cdsc_absaddr.msf.second,
 					subchannel->cdsc_absaddr.msf.frame);
-	printf("Relative CD position: %i:%i.%i\n",
+	printf("Relative CD position: %i:%02i.%02i\n",
 					subchannel->cdsc_reladdr.msf.minute,
 					subchannel->cdsc_reladdr.msf.second,
 					subchannel->cdsc_reladdr.msf.frame);
