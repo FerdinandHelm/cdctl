@@ -379,25 +379,25 @@ int do_get_subchannel(int cdrom) {
 
 	switch(subchannel->cdsc_audiostatus) {
 		case CDROM_AUDIO_INVALID:
-			printf("Audio status: invalid\n");
+			printf("Audio status: INVALID\n");
 			break;
 		case CDROM_AUDIO_PLAY:
-			printf("Audio status: play\n");
+			printf("Audio status: PLAYING\n");
 			break;
 		case CDROM_AUDIO_PAUSED:
-			printf("Audio status: paused\n");
+			printf("Audio status: PAUSED\n");
 			break;
 		case CDROM_AUDIO_COMPLETED:
-			printf("Audio status: completed\n");
+			printf("Audio status: COMPLETED\n");
 			break;
 		case CDROM_AUDIO_ERROR:
-			printf("Audio status: error\n");
+			printf("Audio status: ERROR\n");
 			break;
 		case CDROM_AUDIO_NO_STATUS:
-			printf("Audio status: unknown\n");
+			printf("Audio status: NO_STATUS\n");
 			break;
 		default:
-			printf("Audio status: ??? (%i)\n", subchannel->cdsc_audiostatus);
+			printf("Audio status: unknown (%i)\n", subchannel->cdsc_audiostatus);
 	}
 
 	printf("Current track: %i\n", subchannel->cdsc_trk);
