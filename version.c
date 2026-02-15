@@ -22,7 +22,7 @@
  * fixed in recent kernel headers.
  */
 
-static char vcid[] = "$Id: version.c,v 1.3 2001-07-31 09:07:27 thalakan Exp $\n";
+static char vcid[] = "$Id: version.c,v 1.3 2026-02-15 21:30:00 thalakan Exp $\n";
 
 #include <linux/cdrom.h>
 #include "cdctl.h"
@@ -59,7 +59,7 @@ void usage(void) {
 #ifdef HAVE_DVD_IOCTLS
 "-n     --dvdinfo       Display info for DVD discs\n"
 #endif
-"-q     --audiotstatus  Get and print audio status, current track, and CD position\n"
+"-q     --audiostatus  Get and print audio status, current track, and CD position\n"
 "-pT    --play=T        Play track T\n"
 "-r     --resume        Resume playing\n"
 "-s     --stop          Stop playing\n"
