@@ -54,7 +54,7 @@ int main(int argc, char *argv[]) {
 	int cdrom = -1;
 	int option = 0; 
 
-	static char options[] = "ab:cd:eghiklmno::p::rst:u:v::V";
+	static char options[] = "ab:cd:eghiklmno::p::qrst:u:v::V";
 	static struct option longoptions[] = {
 		{ "pause",	    0,	NULL,	'a' },
 		{ "speed",          1,  NULL,   'b' },
@@ -222,6 +222,9 @@ int main(int argc, char *argv[]) {
 		case 'p':
 			do_play(cdrom);
 			break;
+		case 'q':
+			do_get_subchannel(cdrom);
+			break;
 		case 's':
 			cd_stop(cdrom);
 			break;
@@ -252,10 +255,6 @@ int main(int argc, char *argv[]) {
 			}
 			break;
 #endif
-		case 'q':
-			do_get_subchannel(cdrom);
-			break;
-
 		case 't':
 			if(optarg != NULL) {
 				if(atoi(optarg) != 0) {
