@@ -143,13 +143,13 @@ struct cdrom_subchnl *cd_get_subchannel(int cdrom) {
 		exit(1);
 	}
 
+	subchnl->cdsc_format = CDROM_MSF; /* just to be safe, I guess */
 	ret = ioctl(cdrom, CDROMSUBCHNL, subchnl);
 	if(ret == -1) {
 		warn("can't read subchannel information");
 		return NULL;
-	} else {
-		return subchnl;
 	}
+
 	return subchnl;
 }
 
