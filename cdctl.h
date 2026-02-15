@@ -75,7 +75,7 @@ extern int                     do_print_capabilities(int cdrom);
 extern int                     do_set_volume(int cdrom, char *input);
 extern int                     do_select_disc(int cdrom, char *input);
 extern int                     do_select_speed(int cdrom, char *speed);
-extern int                     do_get_subchannel(int cdrom, int track);
+extern int                     do_get_subchannel(int cdrom);
 extern int                     do_print_tocentry(int cdrom, int track);
 extern void *                  do_get_block(int fd, int offset, int len);
 
