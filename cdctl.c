@@ -81,6 +81,7 @@ int main(int argc, char *argv[]) {
 		{ "dvdinfo",        0,  NULL,   'n' },
 #endif
 		{ "play",	    2,	NULL,	'p' },
+		{ "audiostatus",      0,  NULL,   'q' },
 		{ "resume",	    0,	NULL,	'r' },
 		{ "stop",	    0,	NULL,	's' },
 		{ "tocentry",	    1,	NULL,	't' },
@@ -212,12 +213,12 @@ int main(int argc, char *argv[]) {
 		case 'a':
 			cd_pause(cdrom);
 			break;
-	    case 'i':  
+		case 'i':  
 			do_dump_header(cdrom, 0); /* 0 == no hexdump */
 			break;
 		case 'r':
 			cd_resume(cdrom);
-	        	break;
+			break;
 		case 'p':
 			do_play(cdrom);
 			break;
@@ -230,7 +231,7 @@ int main(int argc, char *argv[]) {
 		case 'm':
 			do_print_mcn(cdrom);
 			break;
-	        case 'n':
+		case 'n':
 			do_print_dvdinfo(cdrom);
 			break;
 		case 'u':
@@ -238,7 +239,7 @@ int main(int argc, char *argv[]) {
 			break;
 		case 'g':
 			do_print_status(cdrom);
-		   	break;
+			break;
 		case 'l':
 			do_print_toc(cdrom);
 			break;
@@ -251,6 +252,10 @@ int main(int argc, char *argv[]) {
 			}
 			break;
 #endif
+		case 'q':
+			do_get_subchannel(cdrom);
+			break;
+
 		case 't':
 			if(optarg != NULL) {
 				if(atoi(optarg) != 0) {
@@ -318,7 +323,7 @@ int do_print_mcn(int cdrom) {
 		return 0;
 	} else if(ret->medium_catalog_number[13] != 0) {
 		warnx("Got wierd struct cdrom_mcn from the cdrom driver.  Notify the\n"
-              "maintainers (cdctl --help) immediately¸ you've found a bug!\n");
+              "maintainers (cdctl --help) immediatelyï¿½ you've found a bug!\n");
 		return 0;
 	} else {
 		if(getenv("DEBUG")) {
@@ -362,6 +367,30 @@ int do_print_capabilities(int cdrom) {
 #endif
 
 	return ret;
+}
+
+
+int do_get_subchannel(int cdrom) {
+	struct cdrom_subchnl *subchannel;
+
+	subchannel = cd_get_subchannel(cdrom);
+	if(subchannel == NULL) {
+		return 0;
+	}
+
+	printf("Audio status: %i\n", subchannel->cdsc_audiostatus);
+	printf("Current track: %i\n", subchannel->cdsc_trk);
+	printf("Current index: %i\n", subchannel->cdsc_ind);
+	printf("Absolute CD position: %i:%i:%i\n",
+					subchannel->cdsc_absaddr.msf.minute,
+					subchannel->cdsc_absaddr.msf.second,
+					subchannel->cdsc_absaddr.msf.frame);
+	printf("Relative CD position: %i:%i:%i\n",
+					subchannel->cdsc_reladdr.msf.minute,
+					subchannel->cdsc_reladdr.msf.second,
+					subchannel->cdsc_reladdr.msf.frame);
+
+	return 1;
 }
 
 

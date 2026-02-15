@@ -133,6 +133,26 @@ int cd_resume(int cdrom) {
 	return 1;
 }
 
+struct cdrom_subchnl *cd_get_subchannel(int cdrom) {
+	int ret;
+	struct cdrom_subchnl *subchnl;
+
+	subchnl = malloc(sizeof(struct cdrom_subchnl));
+	if(subchnl == NULL) {
+		warn("can't allocate memory!");
+		exit(1);
+	}
+
+	ret = ioctl(cdrom, CDROMSUBCHNL, subchnl);
+	if(ret == -1) {
+		warn("can't read subchannel information");
+		return NULL;
+	} else {
+		return subchnl;
+	}
+	return subchnl;
+}
+
 /*
 struct cdrom_tocentry
 {

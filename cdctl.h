@@ -53,6 +53,7 @@ extern int                     cd_get_changer_nslots(int cdrom);
 extern int                     cd_select_disc(int cdrom, int disc);
 extern int                     cd_set_autoeject(int cdrom, int arg);
 extern int                     cd_select_speed(int cdrom, int speed);
+extern struct cdrom_subchnl *  cd_get_subchannel(int cdrom);
 extern struct cdrom_tocentry * cd_get_tocentry(int cdrom, int track);
 extern int                     cd_play(int cdrom, int start, int finish);
 int                            cd_set_volume(int cdrom, struct cdrom_volctrl *volume);
@@ -74,6 +75,7 @@ extern int                     do_print_capabilities(int cdrom);
 extern int                     do_set_volume(int cdrom, char *input);
 extern int                     do_select_disc(int cdrom, char *input);
 extern int                     do_select_speed(int cdrom, char *speed);
+extern int                     do_get_subchannel(int cdrom, int track);
 extern int                     do_print_tocentry(int cdrom, int track);
 extern void *                  do_get_block(int fd, int offset, int len);
 

@@ -59,6 +59,7 @@ void usage(void) {
 #ifdef HAVE_DVD_IOCTLS
 "-n     --dvdinfo       Display info for DVD discs\n"
 #endif
+"-q     --subchannel    Get and print audio status, current track, and CD position\n"
 "-pT    --play=T        Play track T\n"
 "-r     --resume        Resume playing\n"
 "-s     --stop          Stop playing\n"
