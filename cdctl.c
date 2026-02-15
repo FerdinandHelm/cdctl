@@ -377,14 +377,36 @@ int do_get_subchannel(int cdrom) {
 		return 0;
 	}
 
-	printf("Audio status: %i\n", subchannel->cdsc_audiostatus);
+	switch(subchannel->cdsc_audiostatus) {
+		case CDROM_AUDIO_INVALID:
+			printf("Audio status: invalid\n");
+			break;
+		case CDROM_AUDIO_PLAY:
+			printf("Audio status: play\n");
+			break;
+		case CDROM_AUDIO_PAUSED:
+			printf("Audio status: paused\n");
+			break;
+		case CDROM_AUDIO_COMPLETED:
+			printf("Audio status: completed\n");
+			break;
+		case CDROM_AUDIO_ERROR:
+			printf("Audio status: error\n");
+			break;
+		case CDROM_AUDIO_NO_STATUS:
+			printf("Audio status: unknown\n");
+			break;
+		default:
+			printf("Audio status: ??? (%i)\n", subchannel->cdsc_audiostatus);
+	}
+
 	printf("Current track: %i\n", subchannel->cdsc_trk);
 	printf("Current index: %i\n", subchannel->cdsc_ind);
-	printf("Absolute CD position: %i:%i:%i\n",
+	printf("Absolute CD position: %i:%i.%i\n",
 					subchannel->cdsc_absaddr.msf.minute,
 					subchannel->cdsc_absaddr.msf.second,
 					subchannel->cdsc_absaddr.msf.frame);
-	printf("Relative CD position: %i:%i:%i\n",
+	printf("Relative CD position: %i:%i.%i\n",
 					subchannel->cdsc_reladdr.msf.minute,
 					subchannel->cdsc_reladdr.msf.second,
 					subchannel->cdsc_reladdr.msf.frame);
